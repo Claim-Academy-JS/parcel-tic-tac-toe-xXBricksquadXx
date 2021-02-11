@@ -13,6 +13,12 @@ const state = {
 
 const render = (st = state) => {
   root.innerHTML = Main(st);
+
+  document.querySelectorAll("main div").forEach((div) => {
+    div.addEventListener("click", function handleClick() {
+      console.log(this.dataset.num);
+    });
+  });
 };
 
 render();
