@@ -17,10 +17,16 @@ const render = (st = state) => {
   document.querySelectorAll("main div").forEach((div) => {
     div.addEventListener("click", function handleClick() {
       const { board: updatedBoard } = st;
-      updatedBoard[this.dataset.num] = st.currentChar;
 
-      state.board = [...updatedBoard];
-      state.currentChar = st.currentChar === "X" ? "O" : "X";
+      if (!updatedBoard[this.dataset.num]) {
+        updatedBoard[this.dataset.num] = st.currentChar;
+
+        state.board = [...updatedBoard];
+        state.currentChar = st.currentChar === "X" ? "O" : "X";
+        state.error = "";
+      } else {
+        state.error = "Already filled in!";
+      }
       render();
     });
   });
